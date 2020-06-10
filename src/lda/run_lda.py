@@ -79,7 +79,8 @@ def compose_corpus(processed_pub):
 
 print("parsing articles...")
 start = time.process_time()
-texts = compose_corpus(pub_content)
+processed_pubs = process_entire_publication(pub_content)    
+texts = compose_corpus(processed_pubs)
 print("\n   total execution time in seconds: ")
 print(time.process_time() - start)
 id2word = corpora.Dictionary(texts)
