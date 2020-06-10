@@ -1,7 +1,7 @@
 # arg parse
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input-file", type=str)
+parser.add_argument("-i", "--input-directory", type=str)
 parser.add_argument("-o", "--output-file", type=str)
 args = parser.parse_args()
 
@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 import os
 import re
+import glob
 np.random.seed(0)
 
 # textblob sentiment analysis
@@ -29,7 +30,17 @@ from nltk.corpus import stopwords
 # for saving file
 import pickle
 
-df = pd.read_csv(args.input_file)
+all_files = glob.glob(args.input_directory + "/*.csv")
+
+list_of_dfs = []
+
+for filename in all_files:
+    df = pd.read_csv(filename, index_col=None)
+    list_of_dfs.append(df)
+
+df = pd.concat(list_of_dfs, axis=0, ignore_index=True)
+
+
 print("\n\n")
 print("printing the list of publications in this file")
 pubs = np.unique(df.publication)
