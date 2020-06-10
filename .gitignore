@@ -1,5 +1,5 @@
-.ipynb_checkpoint
+*.ipynb_checkpoint
 
 #swp files
-.swp
+*.swp
 
